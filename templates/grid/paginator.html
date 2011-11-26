@@ -1,0 +1,21 @@
+<div class="pagination pagination-left">
+    <div class="results">
+        <span>Wyniki od {{ grid.page.start_index }} do {{ grid.page.end_index }} z {{ grid.paginator.count }}</span>
+    </div>
+ <ul class="pager">
+  {% if grid.page.has_previous %}
+   <li><a href="{{ request.path }}?order={{ request.GET.order }}&page={{grid.page.previous_page_number}}" title="Poprzednia">&laquo; Poprzednia</a></li>
+  {% endif %}
+  {% for pagenum in grid.paginator.page_range %}
+  {%  ifequal pagenum grid.page.number %}
+   <li class="current">{{ pagenum }}</li>
+  {%  else %}
+   <li><a href="{{ request.path }}?order={{ request.GET.order }}&page={{pagenum}}" title="Strona {{pagenum}}">{{pagenum}}</a></li>
+  {%  endifequal %}
+ {% endfor %}
+ 
+ {% if grid.page.has_next %}
+  <li><a href="{{ request.path }}?order={{ request.GET.order }}&page={{grid.page.next_page_number}}" title="Kolejna">Kolejna &raquo;</a></li> 
+ {% endif %}
+ </ul>
+</div>
