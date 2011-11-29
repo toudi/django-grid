@@ -34,7 +34,7 @@ class Grid(object):
         order = self.request.GET.get("order", order_by)
         
         if meta:
-            if not queryset:
+            if queryset is None:
                 queryset = meta.model.objects
             sortable = getattr(meta, "sortable", ())
             nonsortable = getattr(meta, "nonsortable", ())            
@@ -68,3 +68,10 @@ class Grid(object):
     @property
     def columns(self):
         return self._columns
+    
+    @property
+    def url(self):
+        url = self.request.get_full_path()
+        if not self.request.GET:
+            url += "?"
+        return url

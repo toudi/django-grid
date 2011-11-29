@@ -1,39 +1,32 @@
-<div class="box">
-    {% if title %}
-    <div class="title">
-        <h5>{{ title }}</h5>
-    </div>
-    {% endif %}
-    <div class="table">
-        <table>
-            <thead>
-                <tr>
-                    {% for col in grid.columns %}
-                    <th>
-                        {% if col.sortable %}
-                        <a href="{{ grid.request.path }}?order={{ col.order }}&page={{ grid.page.number }}">{{ col.label }}</a>
-                        {% else %}
-                        {{ col.label }}
-                        {% endif %}
-                    </th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% if grid.page.object_list %}
-                {% for row in grid.page.object_list %}
-                {% include row_template|default:"grid/row.html" %}
+<div class="table">
+    <table>
+        <thead>
+            <tr>
+                {% for col in grid.columns %}
+                <th>
+                    {% if col.sortable %}
+                    <a href="{{ grid.request.path }}?order={{ col.order }}&page={{ grid.page.number }}">{{ col.label }}</a>
+                    {% else %}
+                    {{ col.label }}
+                    {% endif %}
+                </th>
                 {% endfor %}
-                {% else %}
-                <tr>
-                    <td colspan="{{ grid.columns|length }}" align="center">Brak rekordów do wyświetlenia</td>
-                </tr>
-                {% endif %}
-            </tbody>
-        </table>
-        
-        {% if grid.paginator.num_pages > 1 %}
-        {% include paginator_template|default:"grid/paginator.html" %}
-        {% endif %}
-    </div>
+            </tr>
+        </thead>
+        <tbody>
+            {% if grid.page.object_list %}
+            {% for row in grid.page.object_list %}
+            {% include row_template|default:"grid/row.html" %}
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="{{ grid.columns|length }}" align="center">Brak rekordów do wyświetlenia</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    
+    {% if grid.paginator.num_pages > 1 %}
+    {% include paginator_template|default:"grid/paginator.html" %}
+    {% endif %}
 </div>

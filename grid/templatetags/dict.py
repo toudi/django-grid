@@ -11,5 +11,5 @@ def get(dict, key):
             return getattr(dict, key)
     
     return None
-        
+
 register.filter(get)
