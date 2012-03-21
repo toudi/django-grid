@@ -1,0 +1,20 @@
+{% for col in grid.columns %}
+{% load dict %}
+<th{% if col.colname == "__delete__" %} width="5%"{% endif %}>
+    {% if col.colname == "__delete__" %}
+    <input type="submit" name="{{ deletesubmit|default:"delete" }}" value="{{ col.label }}" />
+    {% else %}
+        {% if col.sortable %}
+        <a href="{{ grid.request.path }}?order={{ col.order }}&page={{ grid.page.number }}" class="sort-column"
+        {% if grid.order|check_order:col.colname %}
+            style="text-decoration: underline; {{ grid.order|check_order_by }}"
+        {% endif %}
+        >
+            {{ col.label }}
+        </a>
+        {% else %}            
+        {{ col.label }}
+        {% endif %}
+    {% endif %}
+</th>
+{% endfor %}

@@ -1,0 +1,60 @@
+<div class="table">
+    {% if title %}
+    <div class="title">
+        <h5>{{ title }}</h5>
+    </div>
+{% endif %}
+<div>
+<table class="grid" style="border-right: 15px solid white;">
+        <thead>
+            <tr>
+                {% include header_template|default:"grid/header.html" %}
+            </tr>
+        </thead>
+</table>
+</div>
+<div style="overflow-y: scroll; max-height: 350px; border: solid 1px; border-color: #EEE">
+    <table class="grid">
+        <tbody>
+            {% if grid.page.object_list %}
+            {% for row in grid.page.object_list %}
+            {% include row_template|default:"grid/row.html" %}
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="{{ grid.columns|length }}" align="center">Brak rekordów do wyświetlenia</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+    {% if grid.paginator.num_pages > 1 %}
+    {% include paginator_template|default:"grid/paginator.html" %}
+{% endif %}
+
+<table style="margin-top:5px;width: 150px">
+    <tr class=d0>
+    {% if foldery %}
+        
+        <td style="width: 20px"><input type="submit" onclick="$('#maile_form').attr('target', '_self');" value="" title="Usuń wiadomości" name="usun" style="background: url('{{ STATIC_URL }}resources/images/poczta/usun.png');background-repeat:no-repeat; width: 28px; height: 26px; border:0; cursor: pointer;"/></td>
+        <td style="width: 20px"><input type="submit" onclick="$('#maile_form').attr('target', '_self');" value="" name="odpowiedz" title="Odpowiedz" style="background: url('{{ STATIC_URL }}resources/images/poczta/odp.png');background-repeat:no-repeat; width: 28px; height: 26px; border:0; cursor: pointer"/></td>
+        <td style="width: 20px"><input type="submit" onclick="$('#maile_form').attr('target', '_self');" value="" name="odpowiedz_w" title="Odpowiedz wszystkim" style="background: url('{{ STATIC_URL }}resources/images/poczta/odp_w.png');background-repeat:no-repeat; width: 28px; height: 26px; border:0; cursor: pointer"/></td>
+        <td style="width: 20px"><input type="submit" onclick="$('#maile_form').attr('target', '_self');" value="" name="przekaz" title="Przekaż dalej" style="background: url('{{ STATIC_URL }}resources/images/poczta/przekaz.png');background-repeat:no-repeat; width: 32px; height: 26px; border:0; cursor: pointer"/></th>
+        <td style="width: 20px"><input type="submit" onclick="$('#maile_form').attr('target', '_self');" value="" name="dodaj_kontakt" title="Dodaj kontakt z maila" style="background: url('{{ STATIC_URL }}resources/images/poczta/dodaj_kontakt.png');background-repeat:no-repeat; width: 33px; height: 26px; border:0; cursor: pointer"/></td>
+        <td><a id="druk_but" title="Drukuj wiadomość" target="_blank"><img src="{{ STATIC_URL }}resources/images/poczta/drukuj.png"></a></td>
+    {% else %}
+        <td><img src="{{ STATIC_URL }}resources/images/poczta/usun_nie.png"></td>
+        <td><img src="{{ STATIC_URL }}resources/images/poczta/odp_nie.png"></td>
+        <td><img src="{{ STATIC_URL }}resources/images/poczta/odp_w_nie.png"></td>
+        <td><img src="{{ STATIC_URL }}resources/images/poczta/przekaz_nie.png"></td>
+        <td><img src="{{ STATIC_URL }}resources/images/poczta/dodaj_kontakt_nie.png"></td>
+    {% endif %}
+    </tr>
+</table>
+<div style="border: solid 1px; max-height: 350px; padding: 5px; border-color: #EEE">
+<div id="tresc_wiadomosci">
+<iframe id="myframe" name="myframe" class="autoHeigh" scrolling="auto" frameborder="0" src="" style="width: 100%; height: 350px"></iframe>			
+</div>
+</div>
+
+</div>

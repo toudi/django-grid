@@ -1,0 +1,17 @@
+{% load dict %}
+<tr>
+    {% for col in grid.columns %}
+
+    {% if grid.custom_columns|contains:col.colname %}
+    {% include grid.custom_columns|get:col.colname %}
+    {% else %}        
+    <td>
+        {% if col.colname == "__delete__" %}
+        <input type="checkbox" name="{{ deletename|default:"id" }}" value="{% if deletename %}{{ row|get:deletename }}{% else %}{{ row|get:"id" }}{% endif %}" />
+        {% else %}
+        {{ row|get:col.colname|default:"" }}
+        {% endif %}
+    </td>
+    {% endif %}    
+    {% endfor %}
+</tr>

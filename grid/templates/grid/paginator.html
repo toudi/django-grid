@@ -1,4 +1,6 @@
 {% load request %}
+{% load list %}
+{% load admin_list %}
 <div class="pagination pagination-left">
     <div class="results">
         <span>Wyniki od {{ grid.page.start_index }} do {{ grid.page.end_index }} z {{ grid.paginator.count }}</span>
@@ -7,14 +9,24 @@
   {% if grid.page.has_previous %}
    <li><a href="{{ request.path }}?{{ request.GET|page:grid.page.previous_page_number }}" title="Poprzednia">&laquo; Poprzednia</a></li>
   {% endif %}
-  {% for pagenum in grid.paginator.page_range %}
+  
+ {% if grid.paginator_show_first %}
+     <li><a href="{{ request.path }}?{{ request.GET|page:1}}" title="Pierwsza">1</a></li>
+     <li><a href="#">...</a></li>
+ {% endif %}
+
+  
+  {% for pagenum in grid.paginator_page_range %}
   {%  ifequal pagenum grid.page.number %}
    <li class="current">{{ pagenum }}</li>
-  {%  else %}
+  {% else %}
    <li><a href="{{ request.path }}?{{ request.GET|page:pagenum}}" title="Strona {{pagenum}}">{{pagenum}}</a></li>
-  {%  endifequal %}
+  {% endifequal %}
  {% endfor %}
- 
+ {% if grid.paginator_show_last %}
+     <li><a href="#">...</a></li>
+     <li><a href="{{ request.path }}?{{ request.GET|page:grid.paginator.num_pages}}" title="Ostatnia">{{ grid.paginator.num_pages }}</a></li> 
+ {% endif %}
  {% if grid.page.has_next %}
   <li><a href="{{ request.path }}?{{ request.GET|page:grid.page.next_page_number}}" title="Kolejna">Kolejna &raquo;</a></li> 
  {% endif %}

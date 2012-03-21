@@ -1,16 +1,13 @@
 <div class="table">
-    <table>
+    {% if title %}
+    <div class="title">
+        <h5>{{ title }}</h5>
+    </div>
+    {% endif %}
+    <table class="grid">
         <thead>
             <tr>
-                {% for col in grid.columns %}
-                <th>
-                    {% if col.sortable %}
-                    <a href="{{ grid.request.path }}?order={{ col.order }}&page={{ grid.page.number }}">{{ col.label }}</a>
-                    {% else %}
-                    {{ col.label }}
-                    {% endif %}
-                </th>
-                {% endfor %}
+                {% include header_template|default:"grid/header.html" %}
             </tr>
         </thead>
         <tbody>
@@ -29,4 +26,6 @@
     {% if grid.paginator.num_pages > 1 %}
     {% include paginator_template|default:"grid/paginator.html" %}
     {% endif %}
+
+    
 </div>
