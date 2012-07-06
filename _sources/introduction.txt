@@ -1,0 +1,16 @@
+Introduction
+============
+
+I created this application in order to easily display data from multiple sources:
+
+* Django model's (Querysets)
+* MongoDB (Non model data)
+* Results from my non-model-full-text-search application
+
+I was searching for such application, but failed to find one that would fit my needs. There was one application, but it required
+for setting the whole display logic in python code, which i wasn't very keen to do. I wanted to use django's default pagination plugin.
+
+If you are visiting the docs, this means that you either have similar needs, or are quite desperate.. :)
+
+Let me clarify that there are parts of the code (especially ``templates/grid/paginator.html``) which i'm not satisfied with. (In this particular
+file i create the links dynamically, but with ugly template filters). If you know how to do it better, please feel free to help me.
