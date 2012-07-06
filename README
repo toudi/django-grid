@@ -1,3 +1,9 @@
+Sphinx documentation.
+=====================
+If was lucky enough to succesfully build gh-pages branch, you could try to view the documentation here: http://toudi.github.com/django-grid
+
+Quick and dirty tutorial
+========================
 This is a very quick info on how to use django-grid. I'll try to supply more documentation later.
 
 First, you need to add 'grid' to your INSTALLED_APPS:
@@ -21,8 +27,6 @@ from grid import Grid
 class MyModelGrid(Grid):
  class Meta:
   model = MyModel
-  columns = ("column",)
-  sortable = ("column",)
   
 and last but not least - create a view which would display the grid:
 
