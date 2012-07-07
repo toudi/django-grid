@@ -1,0 +1,177 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Config thyself! &mdash; django-grid 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-grid 0.1 documentation" href="../index.html" />
+    <link rel="next" title="Grid templates" href="templates.html" />
+    <link rel="prev" title="Quickstart" href="../quickstart.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="templates.html" title="Grid templates"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../quickstart.html" title="Quickstart"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">django-grid 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="config-thyself">
+<h1>Config thyself!<a class="headerlink" href="#config-thyself" title="Permalink to this headline">¶</a></h1>
+<p>Note: All of the configuration options fall into the Meta class. sor for instance if i write about <tt class="docutils literal"><span class="pre">columns</span></tt> property, this means a following structure::</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">FailsGrid</span><span class="p">(</span><span class="n">Grid</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;author&quot;</span><span class="p">,</span> <span class="s">&quot;date&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Note: the <tt class="docutils literal"><span class="pre">model</span></tt> property is only needed, when using the basic grid class (Grid). There are two other classes (MongoGrid and ArrayGrid) in which case the
+<tt class="docutils literal"><span class="pre">model</span></tt> property is irrelevant.</p>
+<div class="section" id="list-of-displayed-columns">
+<h2>List of displayed columns<a class="headerlink" href="#list-of-displayed-columns" title="Permalink to this headline">¶</a></h2>
+<p>You can change the subset of displayed columns by creating <tt class="docutils literal"><span class="pre">Meta.columns</span></tt> property, like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;author&quot;</span><span class="p">,</span> <span class="s">&quot;date&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The column labels are either user-defined or are taken from django&#8217;s verbose_name for the field. If you would like
+to provide a different label, you are free to do so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s">&quot;author&quot;</span><span class="p">,</span> <span class="s">&quot;This is the label for author column&quot;</span><span class="p">),</span>
+    <span class="s">&quot;date&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>So in the above example, the column &#8220;author&#8221; will have a custom label (because it&#8217;s a tuple) and &#8220;date&#8221; column will have a default one (because it&#8217;s a string)</p>
+</div>
+<div class="section" id="custom-column-renders">
+<h2>Custom column renders<a class="headerlink" href="#custom-column-renders" title="Permalink to this headline">¶</a></h2>
+<p>So you have established your desired columns. But you want to change the way they are rendered on the page.
+Let&#8217;s not waste any second!</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;author&quot;</span><span class="p">,</span> <span class="s">&quot;date&quot;</span><span class="p">]</span>
+<span class="n">custom_columns</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&quot;author&quot;</span><span class="p">:</span> <span class="s">&quot;fails/list_author.html&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So what you do is you create a dict with the columns being the keys, and templates used to render being the values of it.
+The column render file <strong>has to</strong> include td wrapper tag. You reference the record via <tt class="docutils literal"><span class="pre">row</span></tt> variable.</p>
+<div class="highlight-python"><pre>&lt;td&gt;{{ row.author.get_full_name }}&lt;/td&gt;</pre>
+</div>
+<p>These are just plain django templates, so you can use links and all of that good stuff:</p>
+<div class="highlight-python"><pre>&lt;td&gt;&lt;a href="{% url my-url-name with id=row.id %}"&gt;{{ row.get_foo_display }}&lt;/a&gt;&lt;/td&gt;</pre>
+</div>
+</div>
+<div class="section" id="custom-row-templates">
+<h2>Custom row templates<a class="headerlink" href="#custom-row-templates" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, custom rendering of columns just doesn&#8217;t cut it. You need to override the way the whole row is rendered. <tt class="docutils literal"><span class="pre">row_template</span></tt>
+to the rescue!</p>
+<div class="highlight-python"><pre>{% include "grid/object_list.html" with row_template="my-custom-row-template.html" %}</pre>
+</div>
+<p>And here is a sample of such template:</p>
+<div class="highlight-python"><pre>&lt;tr&gt;
+    &lt;td&gt;{{ forloop.counter|add:grid.page.start_index }}&lt;/td&gt;
+    &lt;td&gt;{{ row.some_column }}&lt;/td&gt;
+&lt;/tr&gt;</pre>
+</div>
+<p>The first column would display the item number</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Config thyself!</a><ul>
+<li><a class="reference internal" href="#list-of-displayed-columns">List of displayed columns</a></li>
+<li><a class="reference internal" href="#custom-column-renders">Custom column renders</a></li>
+<li><a class="reference internal" href="#custom-row-templates">Custom row templates</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../quickstart.html"
+                        title="previous chapter">Quickstart</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="templates.html"
+                        title="next chapter">Grid templates</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/config/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="templates.html" title="Grid templates"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../quickstart.html" title="Quickstart"
+             >previous</a> |</li>
+        <li><a href="../index.html">django-grid 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, toudi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

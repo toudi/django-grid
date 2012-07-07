@@ -9,12 +9,13 @@ Welcome to django-grid's documentation!
 Contents:
 
 .. toctree::
+   :glob:
    :maxdepth: 2
 
    introduction
    installation
    quickstart
-   
+   config/*
 
 Indices and tables
 ==================

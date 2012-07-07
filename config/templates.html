@@ -1,0 +1,126 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Grid templates &mdash; django-grid 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="django-grid 0.1 documentation" href="../index.html" />
+    <link rel="prev" title="Config thyself!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Config thyself!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">django-grid 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="grid-templates">
+<h1>Grid templates<a class="headerlink" href="#grid-templates" title="Permalink to this headline">¶</a></h1>
+<p>The grid uses it&#8217;s default templates. It is almost certain, that you would like to override them, in order to match your desired css / html convention.</p>
+<p>If you want to override the template, you need to create the following structure:</p>
+<div class="highlight-python"><pre>. (project directory)
+├── manage.py
+└── templates
+    └── grid</pre>
+</div>
+<p>And you put your custom templates inside the <tt class="docutils literal"><span class="pre">templates/grid</span></tt> directory.</p>
+<div class="section" id="object-s-list-object-list-html">
+<h2>Object&#8217;s list - <tt class="docutils literal"><span class="pre">object_list.html</span></tt><a class="headerlink" href="#object-s-list-object-list-html" title="Permalink to this headline">¶</a></h2>
+<p>This is the template, that renders the grid itself. It has a for loop over the items. It also displays &#8216;no items found&#8217; via td with a colspan.</p>
+</div>
+<div class="section" id="pagination-pagination-html">
+<h2>Pagination - <tt class="docutils literal"><span class="pre">pagination.html</span></tt><a class="headerlink" href="#pagination-pagination-html" title="Permalink to this headline">¶</a></h2>
+<p>This is the grid&#8217;s pagination plugin.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Grid templates</a><ul>
+<li><a class="reference internal" href="#object-s-list-object-list-html">Object&#8217;s list - <tt class="docutils literal"><span class="pre">object_list.html</span></tt></a></li>
+<li><a class="reference internal" href="#pagination-pagination-html">Pagination - <tt class="docutils literal"><span class="pre">pagination.html</span></tt></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Config thyself!</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/config/templates.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Config thyself!"
+             >previous</a> |</li>
+        <li><a href="../index.html">django-grid 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, toudi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

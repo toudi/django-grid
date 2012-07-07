@@ -1,0 +1,68 @@
+Config thyself!
+===============
+Note: All of the configuration options fall into the Meta class. sor for instance if i write about ``columns`` property, this means a following structure:::
+
+    class FailsGrid(Grid):
+        class Meta:
+            columns = ["author", "date"]
+
+Note: the ``model`` property is only needed, when using the basic grid class (Grid). There are two other classes (MongoGrid and ArrayGrid) in which case the
+``model`` property is irrelevant.
+
+List of displayed columns
+-------------------------
+You can change the subset of displayed columns by creating ``Meta.columns`` property, like this:
+::
+
+    columns = ["author", "date"]
+
+The column labels are either user-defined or are taken from django's verbose_name for the field. If you would like
+to provide a different label, you are free to do so:
+::
+
+    columns = [
+        ("author", "This is the label for author column"),
+        "date"
+    ]
+
+So in the above example, the column "author" will have a custom label (because it's a tuple) and "date" column will have a default one (because it's a string)
+
+Custom column renders
+---------------------
+So you have established your desired columns. But you want to change the way they are rendered on the page.
+Let's not waste any second!
+::
+
+    columns = ["author", "date"]
+    custom_columns = {
+        "author": "fails/list_author.html"
+    }
+
+
+So what you do is you create a dict with the columns being the keys, and templates used to render being the values of it.
+The column render file **has to** include td wrapper tag. You reference the record via ``row`` variable.
+::
+
+    <td>{{ row.author.get_full_name }}</td>
+
+These are just plain django templates, so you can use links and all of that good stuff: ::
+
+    <td><a href="{% url my-url-name with id=row.id %}">{{ row.get_foo_display }}</a></td>
+
+Custom row templates
+--------------------
+Sometimes, custom rendering of columns just doesn't cut it. You need to override the way the whole row is rendered. ``row_template``
+to the rescue!
+
+::
+
+    {% include "grid/object_list.html" with row_template="my-custom-row-template.html" %}
+
+And here is a sample of such template: ::
+
+    <tr>
+        <td>{{ forloop.counter|add:grid.page.start_index }}</td>
+        <td>{{ row.some_column }}</td>
+    </tr>
+
+The first column would display the item number

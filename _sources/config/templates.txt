@@ -1,0 +1,21 @@
+Grid templates
+==============
+The grid uses it's default templates. It is almost certain, that you would like to override them, in order to match your desired css / html convention.
+
+If you want to override the template, you need to create the following structure:
+::
+
+    . (project directory)
+    ├── manage.py
+    └── templates
+        └── grid
+
+And you put your custom templates inside the ``templates/grid`` directory.
+
+Object's list - ``object_list.html``
+------------------------------------
+This is the template, that renders the grid itself. It has a for loop over the items. It also displays 'no items found' via td with a colspan.
+
+Pagination - ``pagination.html``
+--------------------------------
+This is the grid's pagination plugin.
